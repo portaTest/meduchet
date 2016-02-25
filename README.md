@@ -7,4 +7,5 @@
 3. install latest maven
 4. install jdk/jre 8
 5. install eclipse/intellij idea
-6. if you use eclipse install plugin for github
+6. install plugin for github
+7. install vaadin plugin
