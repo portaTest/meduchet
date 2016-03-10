@@ -2,7 +2,7 @@
 ==========================
 
 #Installation
-1. install tomcat 9
+1. install tomcat 8
 2. install latest postgresql
 3. install latest maven
 4. install jdk/jre 8
