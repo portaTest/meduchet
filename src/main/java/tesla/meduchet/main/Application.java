@@ -27,11 +27,10 @@ public class Application {
 		SpringApplication.run(Application.class);
 	}
 
-
 	@Bean
 	public CommandLineRunner loadData(CustomerRepository repository) {
 		return (args) -> {
-			
+
 			// save a couple of customers
 			repository.save(new Customer("Jack", "Bauer"));
 			repository.save(new Customer("Chloe", "O'Brian"));
@@ -57,12 +56,11 @@ public class Application {
 			// fetch customers by last name
 			log.info("Customer found with findByLastNameStartsWithIgnoreCase('Bauer'):");
 			log.info("--------------------------------------------");
-			for (Customer bauer : repository
-					.findByLastNameStartsWithIgnoreCase("Bauer")) {
+			for (Customer bauer : repository.findByLastNameStartsWithIgnoreCase("Bauer")) {
 				log.info(bauer.toString());
 			}
 			log.info("");
-			
+
 		};
 	}
 
