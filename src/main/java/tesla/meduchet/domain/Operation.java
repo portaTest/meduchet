@@ -1,5 +1,6 @@
 package tesla.meduchet.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -36,6 +37,17 @@ public class Operation {
 	@JoinColumn(name = "departmentId")
 	private Department department;
 	
+	@Column(name="fee")
+	private BigDecimal fee;
+	
+	public BigDecimal getFee() {
+		return fee;
+	}
+
+	public void setFee(BigDecimal fee) {
+		this.fee = fee;
+	}
+
 	public Date getDuration() {
 		return duration;
 	}

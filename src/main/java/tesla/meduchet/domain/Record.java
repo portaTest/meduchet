@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import tesla.meduchet.domain.enumeration.RecordStatus;
+
 @Entity
 @Table(name = "T_Record")
 public class Record {
@@ -50,6 +52,9 @@ public class Record {
 	@ManyToOne(targetEntity = Doctor.class)
 	@JoinColumn(name = "doctorId")
 	private Doctor doctor;
+	
+	@Column(name="recordStatus")
+	private RecordStatus status;
 
 	public Long getId() {
 		return id;

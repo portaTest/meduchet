@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import tesla.meduchet.domain.enumeration.DepartmentType;
+
 @Entity
 @Table(name="T_Department")
 public class Department {
@@ -24,6 +26,9 @@ public class Department {
 	
 	@Column(name="address")
 	private String address;
+	
+	@Column(name="type")
+	private DepartmentType departmentType;
 	
 	@OneToMany(targetEntity=Operation.class,mappedBy="department")
 	private List<Operation> operations;

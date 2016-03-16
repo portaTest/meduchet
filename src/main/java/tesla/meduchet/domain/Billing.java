@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import tesla.meduchet.domain.enumeration.PaymentType;
+
 @Entity
 @Table(name="T_Billing")
 public class Billing {
@@ -38,6 +40,17 @@ public class Billing {
 	@Column(name="date")
 	private Date date;
 	
+	@Column(name="paymentType")
+	private PaymentType paymentType;
+	
+	public PaymentType getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(PaymentType paymentType) {
+		this.paymentType = paymentType;
+	}
+
 	public Long getId() {
 		return id;
 	}
