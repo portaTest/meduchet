@@ -11,23 +11,22 @@ import javax.persistence.Table;
 
 import tesla.meduchet.domain.enumeration.PhoneType;
 
-
 @Entity
-@Table(name="T_Phone")
+@Table(name = "T_Phone")
 public class Phone {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name="phone",length=15,nullable=false)
+
+	@Column(name = "phone", length = 15, nullable = false)
 	private String phone;
-	
-	@Column(name="phone_type",nullable=false)
+
+	@Column(name = "phone_type", nullable = false)
 	private PhoneType type;
-	
-	@ManyToOne(targetEntity=User.class)
-	@JoinColumn(name="userId")
+
+	@ManyToOne(targetEntity = User.class)
+	@JoinColumn(name = "userId")
 	private User user;
 
 	public Long getId() {
@@ -62,6 +61,4 @@ public class Phone {
 		this.user = user;
 	}
 
-
-	
 }

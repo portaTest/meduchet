@@ -15,31 +15,31 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="T_Operation")
+@Table(name = "T_Operation")
 public class Operation {
 
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	public String name;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	public String description;
-	
-	@Column(name="duration")
+
+	@Column(name = "duration")
 	@Temporal(TemporalType.TIME)
 	public Date duration;
-	
+
 	@ManyToOne(targetEntity = Department.class)
 	@JoinColumn(name = "departmentId")
 	private Department department;
-	
-	@Column(name="fee")
+
+	@Column(name = "fee")
 	private BigDecimal fee;
-	
+
 	public BigDecimal getFee() {
 		return fee;
 	}

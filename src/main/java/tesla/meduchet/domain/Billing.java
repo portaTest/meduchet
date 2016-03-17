@@ -18,35 +18,34 @@ import javax.persistence.TemporalType;
 import tesla.meduchet.domain.enumeration.PaymentType;
 
 @Entity
-@Table(name="T_Billing")
+@Table(name = "T_Billing")
 public class Billing {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name="cost")
+	@Column(name = "cost")
 	private BigDecimal cost;
 
-	@ManyToOne(targetEntity=Patient.class)
-	@JoinColumn(name="patientId")
+	@ManyToOne(targetEntity = Patient.class)
+	@JoinColumn(name = "patientId")
 	private Patient patient;
 
-	@OneToOne(targetEntity=Record.class)
+	@OneToOne(targetEntity = Record.class)
 	private Record record;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="date")
+	@Column(name = "date")
 	private Date date;
 
-	@Column(name="paymentType")
+	@Column(name = "paymentType")
 	private PaymentType paymentType;
 
-	//TODO doctor
-	@ManyToOne(targetEntity=Doctor.class)
-	@JoinColumn(name="doctorId")
+	// TODO doctor
+	@ManyToOne(targetEntity = Doctor.class)
+	@JoinColumn(name = "doctorId")
 	private Doctor doctor;
-
 
 	public PaymentType getPaymentType() {
 		return paymentType;
@@ -94,5 +93,13 @@ public class Billing {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 }

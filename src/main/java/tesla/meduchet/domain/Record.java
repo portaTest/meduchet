@@ -52,8 +52,8 @@ public class Record {
 	@ManyToOne(targetEntity = Doctor.class)
 	@JoinColumn(name = "doctorId")
 	private Doctor doctor;
-	
-	@Column(name="recordStatus")
+
+	@Column(name = "recordStatus")
 	private RecordStatus status;
 
 	public Long getId() {

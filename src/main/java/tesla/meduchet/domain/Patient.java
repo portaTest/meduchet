@@ -13,25 +13,25 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_Patient")
+@Table(name = "T_Patient")
 public class Patient {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name="discount")
+	@Column(name = "discount")
 	private BigDecimal discount;
-	
-	@OneToMany(targetEntity=Billing.class,mappedBy="patient")
+
+	@OneToMany(targetEntity = Billing.class, mappedBy = "patient")
 	private List<Billing> billing;
-	
-	@OneToMany(targetEntity=Record.class,mappedBy="patient")
+
+	@OneToMany(targetEntity = Record.class, mappedBy = "patient")
 	private List<Record> records;
-	
-	@OneToOne(targetEntity=User.class)
+
+	@OneToOne(targetEntity = User.class)
 	private User user;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -73,4 +73,3 @@ public class Patient {
 	}
 
 }
-

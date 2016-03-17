@@ -28,7 +28,7 @@ public class Doctor {
 
 	@Column(name = "work", length = 128)
 	private String work;
-	
+
 	@Column(name = "balance")
 	private BigDecimal balance;
 
@@ -40,9 +40,7 @@ public class Doctor {
 
 	@OneToMany(targetEntity = Billing.class, mappedBy = "doctor")
 	private List<Billing> billings;
-	
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -98,6 +96,5 @@ public class Doctor {
 	public void setRecords(List<Record> records) {
 		this.records = records;
 	}
-
 
 }

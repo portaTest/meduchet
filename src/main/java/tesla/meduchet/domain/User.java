@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 import tesla.meduchet.domain.enumeration.Role;
 import tesla.meduchet.domain.enumeration.Sex;
 
-
 @Entity
 @Table(name = "T_User")
 public class User {

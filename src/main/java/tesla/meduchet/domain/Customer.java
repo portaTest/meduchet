@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Customer {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String firstName;
@@ -47,8 +47,8 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return String.format("Customer[id=%d, firstName='%s', lastName='%s']", id,
-				firstName, lastName);
+		return String.format("Customer[id=%d, firstName='%s', lastName='%s']",
+				id, firstName, lastName);
 	}
 
 }
