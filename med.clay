@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clay-model clay-version="1.4.0">
+<database-model alias="" author="" begin-script="" end-script="" name="med" remarks="" sql-dialect-id="jp.azzurri.clay.dialect.HSQLDB_1_7_0_Dialect" uid="76ec6ae0:15380e4ed05:-8000" version="1.0">
+<database-model-description/>
+<schema-list>
+<schema alias="" name="public" remarks="" uid="76ec6ae0:15380e4ed05:-7ffe">
+<schema-description/>
+<domain-list/>
+<table-list>
+<table alias="" name="customer" remarks="" uid="76ec6ae0:15380e4ed05:-7ffd">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="49" y="17"/>
+<column-list>
+<column alias="" auto-increment="true" column-size="19" decimal-digits="0" default-value="nextval('customer_id_seq'::regclass)" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7ffb">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="first_name" remarks="" uid="76ec6ae0:15380e4ed05:-7ffa">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="last_name" remarks="" uid="76ec6ae0:15380e4ed05:-7ff9">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="customer_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7ffc">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+<table alias="" name="t_billing" remarks="" uid="76ec6ae0:15380e4ed05:-7ff8">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="320" y="10"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7ff6">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="2" default-value="" mandatory="false" name="cost" remarks="" uid="76ec6ae0:15380e4ed05:-7ff5">
+<column-description/>
+<data-type jdbc-type="2" name="NUMERIC" selected-variant-pattern="NUMERIC(%p,%s)">
+<variant type-name-pattern="NUMERIC"/>
+<variant precision-max="31" precision-min="1" precision-variable="%p" type-name-pattern="NUMERIC(%p)"/>
+<variant precision-max="31" precision-min="1" precision-variable="%p" scale-max="31" scale-min="0" scale-variable="%s" type-name-pattern="NUMERIC(%p,%s)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="29" decimal-digits="6" default-value="" mandatory="false" name="date" remarks="" uid="76ec6ae0:15380e4ed05:-7ff4">
+<column-description/>
+<data-type jdbc-type="93" literal-prefix="'" literal-suffix="'" name="TIMESTAMP" selected-variant-pattern="TIMESTAMP">
+<variant type-name-pattern="TIMESTAMP"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="false" name="payment_type" remarks="" uid="76ec6ae0:15380e4ed05:-7ff3">
+<column-description/>
+<data-type jdbc-type="4" name="INTEGER" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="patient_id" remarks="" uid="76ec6ae0:15380e4ed05:-7ff2">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="record_id" remarks="" uid="76ec6ae0:15380e4ed05:-7ff1">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="t_billing_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7ff7">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="fk_o6iea8hgr4rme3068r9uqh73e" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_patient_pkey" referenced-table="t_patient" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb9">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="patient_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key alias="" name="fk_sao2w5ixqi1gow0im9orj82w1" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_record_pkey" referenced-table="t_record" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb8">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="record_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="t_department" remarks="" uid="76ec6ae0:15380e4ed05:-7ff0">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="536" y="30"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7fee">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="address" remarks="" uid="76ec6ae0:15380e4ed05:-7fed">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="false" name="type" remarks="" uid="76ec6ae0:15380e4ed05:-7fec">
+<column-description/>
+<data-type jdbc-type="4" name="INTEGER" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="name" remarks="" uid="76ec6ae0:15380e4ed05:-7feb">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="t_department_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7fef">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+<table alias="" name="t_doctor" remarks="" uid="76ec6ae0:15380e4ed05:-7fea">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="424" y="380"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7fe8">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="2" default-value="" mandatory="false" name="balance" remarks="" uid="76ec6ae0:15380e4ed05:-7fe7">
+<column-description/>
+<data-type jdbc-type="2" name="NUMERIC" selected-variant-pattern="NUMERIC(%p,%s)">
+<variant type-name-pattern="NUMERIC"/>
+<variant precision-max="31" precision-min="1" precision-variable="%p" type-name-pattern="NUMERIC(%p)"/>
+<variant precision-max="31" precision-min="1" precision-variable="%p" scale-max="31" scale-min="0" scale-variable="%s" type-name-pattern="NUMERIC(%p,%s)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="specialisation" remarks="" uid="76ec6ae0:15380e4ed05:-7fe6">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="type" remarks="" uid="76ec6ae0:15380e4ed05:-7fe5">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="128" decimal-digits="0" default-value="" mandatory="false" name="work" remarks="" uid="76ec6ae0:15380e4ed05:-7fe4">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="user_id" remarks="" uid="76ec6ae0:15380e4ed05:-7fe3">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="t_doctor_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7fe9">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="fk_p5seaapripqj1uldiwpvbvt58" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_user_pkey" referenced-table="t_user" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb7">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="user_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="t_operation" remarks="" uid="76ec6ae0:15380e4ed05:-7fe2">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="610" y="279"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7fe0">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="description" remarks="" uid="76ec6ae0:15380e4ed05:-7fdf">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="15" decimal-digits="6" default-value="" mandatory="false" name="duration" remarks="" uid="76ec6ae0:15380e4ed05:-7fde">
+<column-description/>
+<data-type jdbc-type="92" literal-prefix="'" literal-suffix="'" name="TIME" selected-variant-pattern="TIME">
+<variant type-name-pattern="TIME"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="2" default-value="" mandatory="false" name="fee" remarks="" uid="76ec6ae0:15380e4ed05:-7fdd">
+<column-description/>
+<data-type jdbc-type="2" name="NUMERIC" selected-variant-pattern="NUMERIC(%p,%s)">
+<variant type-name-pattern="NUMERIC"/>
+<variant precision-max="31" precision-min="1" precision-variable="%p" type-name-pattern="NUMERIC(%p)"/>
+<variant precision-max="31" precision-min="1" precision-variable="%p" scale-max="31" scale-min="0" scale-variable="%s" type-name-pattern="NUMERIC(%p,%s)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="name" remarks="" uid="76ec6ae0:15380e4ed05:-7fdc">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="department_id" remarks="" uid="76ec6ae0:15380e4ed05:-7fdb">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="t_operation_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7fe1">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="fk_s6js7e1cob3x0m2ypxueiybg0" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_department_pkey" referenced-table="t_department" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb6">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="department_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="t_patient" remarks="" uid="76ec6ae0:15380e4ed05:-7fda">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="37" y="111"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7fd8">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="2" default-value="" mandatory="false" name="discount" remarks="" uid="76ec6ae0:15380e4ed05:-7fd7">
+<column-description/>
+<data-type jdbc-type="2" name="NUMERIC" selected-variant-pattern="NUMERIC(%p,%s)">
+<variant type-name-pattern="NUMERIC"/>
+<variant precision-max="31" precision-min="1" precision-variable="%p" type-name-pattern="NUMERIC(%p)"/>
+<variant precision-max="31" precision-min="1" precision-variable="%p" scale-max="31" scale-min="0" scale-variable="%s" type-name-pattern="NUMERIC(%p,%s)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="user_id" remarks="" uid="76ec6ae0:15380e4ed05:-7fd6">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="t_patient_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7fd9">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="fk_hchtdocykriajs2iyg0tt2j9p" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_user_pkey" referenced-table="t_user" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb5">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="user_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="t_phone" remarks="" uid="76ec6ae0:15380e4ed05:-7fd5">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="834" y="49"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7fd3">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="15" decimal-digits="0" default-value="" mandatory="true" name="phone" remarks="" uid="76ec6ae0:15380e4ed05:-7fd2">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="true" name="phone_type" remarks="" uid="76ec6ae0:15380e4ed05:-7fd1">
+<column-description/>
+<data-type jdbc-type="4" name="INTEGER" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="user_id" remarks="" uid="76ec6ae0:15380e4ed05:-7fd0">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="t_phone_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7fd4">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="fk_qd9gb78xhcmts2sqy4evu5g6u" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_user_pkey" referenced-table="t_user" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb4">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="user_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="t_record" remarks="" uid="76ec6ae0:15380e4ed05:-7fcf">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="24" y="333"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7fcd">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="13" decimal-digits="0" default-value="" mandatory="false" name="date" remarks="" uid="76ec6ae0:15380e4ed05:-7fcc">
+<column-description/>
+<data-type jdbc-type="91" literal-prefix="'" literal-suffix="'" name="DATE" selected-variant-pattern="DATE">
+<variant type-name-pattern="DATE"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="15" decimal-digits="6" default-value="" mandatory="false" name="duration" remarks="" uid="76ec6ae0:15380e4ed05:-7fcb">
+<column-description/>
+<data-type jdbc-type="92" literal-prefix="'" literal-suffix="'" name="TIME" selected-variant-pattern="TIME">
+<variant type-name-pattern="TIME"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="15" decimal-digits="6" default-value="" mandatory="false" name="end_time" remarks="" uid="76ec6ae0:15380e4ed05:-7fca">
+<column-description/>
+<data-type jdbc-type="92" literal-prefix="'" literal-suffix="'" name="TIME" selected-variant-pattern="TIME">
+<variant type-name-pattern="TIME"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="15" decimal-digits="6" default-value="" mandatory="false" name="start_time" remarks="" uid="76ec6ae0:15380e4ed05:-7fc9">
+<column-description/>
+<data-type jdbc-type="92" literal-prefix="'" literal-suffix="'" name="TIME" selected-variant-pattern="TIME">
+<variant type-name-pattern="TIME"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="false" name="record_status" remarks="" uid="76ec6ae0:15380e4ed05:-7fc8">
+<column-description/>
+<data-type jdbc-type="4" name="INTEGER" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="doctor_id" remarks="" uid="76ec6ae0:15380e4ed05:-7fc7">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="operation_id" remarks="" uid="76ec6ae0:15380e4ed05:-7fc6">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="false" name="patient_id" remarks="" uid="76ec6ae0:15380e4ed05:-7fc5">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="t_record_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7fce">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="fk_sv9nscnh247myq2w696vjj599" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_doctor_pkey" referenced-table="t_doctor" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb3">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="doctor_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key alias="" name="fk_ex7hlxtag7jmkxjig7g66twnm" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_operation_pkey" referenced-table="t_operation" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb2">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="operation_id" referenced-key-column-name="id"/>
+</foreign-key>
+<foreign-key alias="" name="fk_tc8fhav483v8yvoxhxpu22wge" on-delete="NO ACTION" on-update="NO ACTION" referenced-key="t_patient_pkey" referenced-table="t_patient" referenced-table-schema="public" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="76ec6ae0:15380e4ed05:-7fb1">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="patient_id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
+<table alias="" name="t_user" remarks="" uid="76ec6ae0:15380e4ed05:-7fc4">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="434" y="142"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="19" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="76ec6ae0:15380e4ed05:-7fc2">
+<column-description/>
+<data-type jdbc-type="-5" name="BIGINT" selected-variant-pattern="BIGINT">
+<variant type-name-pattern="BIGINT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="13" decimal-digits="0" default-value="" mandatory="false" name="birth_date" remarks="" uid="76ec6ae0:15380e4ed05:-7fc1">
+<column-description/>
+<data-type jdbc-type="91" literal-prefix="'" literal-suffix="'" name="DATE" selected-variant-pattern="DATE">
+<variant type-name-pattern="DATE"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="32" decimal-digits="0" default-value="" mandatory="false" name="first_name" remarks="" uid="76ec6ae0:15380e4ed05:-7fc0">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="32" decimal-digits="0" default-value="" mandatory="false" name="last_name" remarks="" uid="76ec6ae0:15380e4ed05:-7fbf">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="32" decimal-digits="0" default-value="" mandatory="false" name="login" remarks="" uid="76ec6ae0:15380e4ed05:-7fbe">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="32" decimal-digits="0" default-value="" mandatory="false" name="middle_name" remarks="" uid="76ec6ae0:15380e4ed05:-7fbd">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="255" decimal-digits="0" default-value="" mandatory="false" name="password" remarks="" uid="76ec6ae0:15380e4ed05:-7fbc">
+<column-description/>
+<data-type jdbc-type="12" literal-prefix="'" literal-suffix="'" name="VARCHAR" selected-variant-pattern="VARCHAR(%n)">
+<variant precision-max="32672" precision-min="1" precision-variable="%n" type-name-pattern="VARCHAR(%n)"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="false" name="user_role" remarks="" uid="76ec6ae0:15380e4ed05:-7fbb">
+<column-description/>
+<data-type jdbc-type="4" name="INTEGER" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="10" decimal-digits="0" default-value="" mandatory="false" name="sex" remarks="" uid="76ec6ae0:15380e4ed05:-7fba">
+<column-description/>
+<data-type jdbc-type="4" name="INTEGER" selected-variant-pattern="INTEGER">
+<variant type-name-pattern="INTEGER"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="t_user_pkey" remarks="" uid="76ec6ae0:15380e4ed05:-7fc3">
+<primary-key-description/>
+<primary-key-column name="id"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list/>
+<index-list/>
+</table>
+</table-list>
+</schema>
+</schema-list>
+</database-model>
+</clay-model>

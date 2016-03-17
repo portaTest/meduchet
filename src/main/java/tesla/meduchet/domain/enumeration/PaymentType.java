@@ -4,5 +4,6 @@ public enum PaymentType {
 	Cash,//наличные
 	Insurance,//страховка
 	Bank,
-	Cashless
+	Cashless,
+	Rollback
 }

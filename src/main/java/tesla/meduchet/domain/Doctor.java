@@ -28,7 +28,21 @@ public class Doctor {
 
 	@Column(name = "work", length = 128)
 	private String work;
+	
+	@Column(name = "balance")
+	private BigDecimal balance;
 
+	@OneToOne(targetEntity = User.class)
+	private User user;
+
+	@OneToMany(targetEntity = Record.class, mappedBy = "doctor")
+	private List<Record> records;
+
+	@OneToMany(targetEntity = Billing.class, mappedBy = "doctor")
+	private List<Billing> billings;
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -85,13 +99,5 @@ public class Doctor {
 		this.records = records;
 	}
 
-	@Column(name = "balance")
-	private BigDecimal balance;
-
-	@OneToOne(targetEntity = User.class)
-	private User user;
-
-	@OneToMany(targetEntity = Record.class, mappedBy = "doctor")
-	private List<Record> records;
 
 }

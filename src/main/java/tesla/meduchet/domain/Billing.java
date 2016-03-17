@@ -21,28 +21,33 @@ import tesla.meduchet.domain.enumeration.PaymentType;
 @Table(name="T_Billing")
 public class Billing {
 
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(name="cost")
 	private BigDecimal cost;
-	
+
 	@ManyToOne(targetEntity=Patient.class)
 	@JoinColumn(name="patientId")
 	private Patient patient;
-	
+
 	@OneToOne(targetEntity=Record.class)
 	private Record record;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date")
 	private Date date;
-	
+
 	@Column(name="paymentType")
 	private PaymentType paymentType;
-	
+
+	//TODO doctor
+	@ManyToOne(targetEntity=Doctor.class)
+	@JoinColumn(name="doctorId")
+	private Doctor doctor;
+
+
 	public PaymentType getPaymentType() {
 		return paymentType;
 	}
