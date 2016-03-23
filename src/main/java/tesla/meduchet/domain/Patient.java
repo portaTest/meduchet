@@ -5,20 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_Patient")
-public class Patient {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+public class Patient extends User {
 
 	@Column(name = "discount")
 	private BigDecimal discount;
@@ -28,17 +20,6 @@ public class Patient {
 
 	@OneToMany(targetEntity = Record.class, mappedBy = "patient")
 	private List<Record> records;
-
-	@OneToOne(targetEntity = User.class)
-	private User user;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public BigDecimal getDiscount() {
 		return discount;
@@ -62,14 +43,6 @@ public class Patient {
 
 	public void setBilling(List<Billing> billing) {
 		this.billing = billing;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }

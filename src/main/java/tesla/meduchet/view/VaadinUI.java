@@ -19,8 +19,6 @@ import com.vaadin.ui.VerticalLayout;
 import tesla.meduchet.domain.Customer;
 import tesla.meduchet.repository.CustomerRepository;
 
-@SpringUI
-@SpringComponent
 @Theme("valo")
 public class VaadinUI extends UI {
 

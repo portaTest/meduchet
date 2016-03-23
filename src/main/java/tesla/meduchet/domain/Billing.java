@@ -42,7 +42,6 @@ public class Billing {
 	@Column(name = "paymentType")
 	private PaymentType paymentType;
 
-	// TODO doctor
 	@ManyToOne(targetEntity = Doctor.class)
 	@JoinColumn(name = "doctorId")
 	private Doctor doctor;

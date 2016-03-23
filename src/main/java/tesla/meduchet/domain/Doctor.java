@@ -5,20 +5,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_Doctor")
-public class Doctor {
+public class Doctor extends User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 
 	@Column(name = "specialisation")
 	private String specialisation;
@@ -32,22 +25,12 @@ public class Doctor {
 	@Column(name = "balance")
 	private BigDecimal balance;
 
-	@OneToOne(targetEntity = User.class)
-	private User user;
 
 	@OneToMany(targetEntity = Record.class, mappedBy = "doctor")
 	private List<Record> records;
 
 	@OneToMany(targetEntity = Billing.class, mappedBy = "doctor")
 	private List<Billing> billings;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getSpecialisation() {
 		return specialisation;
@@ -81,13 +64,6 @@ public class Doctor {
 		this.balance = balance;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	public List<Record> getRecords() {
 		return records;
