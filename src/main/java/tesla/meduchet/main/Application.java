@@ -14,11 +14,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import tesla.meduchet.domain.Customer;
 import tesla.meduchet.repository.CustomerRepository;
 
+
+
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableJpaRepositories("tesla.meduchet.repository")
 @EntityScan("tesla.meduchet.domain")
-@ComponentScan("tesla.meduchet.view")
+@ComponentScan("tesla.meduchet.gui")
 public class Application {
 
 	private static final Logger log = LoggerFactory.getLogger(Application.class);

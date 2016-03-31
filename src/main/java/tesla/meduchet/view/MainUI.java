@@ -1,18 +1,13 @@
 package tesla.meduchet.view;
 
-import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 
 import tesla.meduchet.domain.User;
 
-@Theme("valo")
-@SpringUI
-@SpringComponent
+
 @SuppressWarnings("serial")
 public class MainUI extends UI{
 
