@@ -1,19 +1,15 @@
 package tesla.meduchet.gui;
 
-import java.util.Locale;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
-import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.Page;
-import com.vaadin.server.Page.BrowserWindowResizeEvent;
-import com.vaadin.server.Page.BrowserWindowResizeListener;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
@@ -24,83 +20,64 @@ import tesla.meduchet.gui.domain.User;
 import tesla.meduchet.gui.event.DashboardEvent.CloseOpenWindowsEvent;
 import tesla.meduchet.gui.event.DashboardEvent.UserLoggedOutEvent;
 import tesla.meduchet.gui.event.DashboardEvent.UserLoginRequestedEvent;
-import tesla.meduchet.gui.event.DashboardEvent.BrowserResizeEvent;
 import tesla.meduchet.gui.event.DashboardEventBus;
 import tesla.meduchet.gui.view.LoginView;
 import tesla.meduchet.gui.view.MainView;
 
 
 @SpringUI
-@SpringComponent
-@Theme("dashboard")
-@Widgetset("com.vaadin.demo.dashboard.DashboardWidgetSet")
-@Title("QuickTickets Dashboard")
+@UIScope
+@Title("Meduchet")
+@Theme("valo")
 @SuppressWarnings("serial")
-public final class DashboardUI extends UI {
+public class DashboardUI extends UI {
 
-    /*
-     * This field stores an access to the dummy backend layer. In real
-     * applications you most likely gain access to your beans trough lookup or
-     * injection; and not in the UI but somewhere closer to where they're
-     * actually accessed.
-     */
-    private final DataProvider dataProvider = new DummyDataProvider();
-    private final DashboardEventBus dashboardEventbus = new DashboardEventBus();
 
-    @Override
-    protected void init(final VaadinRequest request) {
-        setLocale(Locale.US);
+	@Autowired
+    private DashboardEventBus eventBus;
+	
+	@Autowired
+	private LoginView loginView;
+	
+	@Autowired
+	private DataProvider dataProvider;
+	
+	@Autowired
+	private MainView mainView;
+	
 
-        DashboardEventBus.register(this);
+	@Override
+    protected void init(VaadinRequest request) {
+		eventBus.register(this);
         Responsive.makeResponsive(this);
         addStyleName(ValoTheme.UI_WITH_MENU);
-
         updateContent();
-
-        // Some views need to be aware of browser resize events so a
-        // BrowserResizeEvent gets fired to the event bus on every occasion.
-        Page.getCurrent().addBrowserWindowResizeListener(
-                new BrowserWindowResizeListener() {
-                    @Override
-                    public void browserWindowResized(
-                            final BrowserWindowResizeEvent event) {
-                        DashboardEventBus.post(new BrowserResizeEvent());
-                    }
-                });
     }
 
-    /**
-     * Updates the correct content for this UI based on the current user status.
-     * If the user is logged in with appropriate privileges, main view is shown.
-     * Otherwise login view is shown.
-     */
+ 
     private void updateContent() {
         User user = (User) VaadinSession.getCurrent().getAttribute(
                 User.class.getName());
         if (user != null && "admin".equals(user.getRole())) {
-            // Authenticated user
-            setContent(new MainView());
-            removeStyleName("loginview");
-            getNavigator().navigateTo(getNavigator().getState());
+			setContent(mainView);
+			removeStyleName("loginview");
+			//getNavigator().navigateTo(getNavigator().getState());
         } else {
-            setContent(new LoginView());
+            setContent(loginView);
             addStyleName("loginview");
         }
     }
 
     @Subscribe
     public void userLoginRequested(final UserLoginRequestedEvent event) {
-        User user = getDataProvider().authenticate(event.getUserName(),
-                event.getPassword());
-        VaadinSession.getCurrent().setAttribute(User.class.getName(), user);
+    	User user = dataProvider.authenticate(event.getUserName(),event.getPassword());
+    	System.err.println(user.getFirstName());
+    	VaadinSession.getCurrent().setAttribute(User.class.getName(), user);
         updateContent();
     }
 
     @Subscribe
     public void userLoggedOut(final UserLoggedOutEvent event) {
-        // When the user logs out, current VaadinSession gets closed and the
-        // page gets reloaded on the login screen. Do notice the this doesn't
-        // invalidate the current HttpSession.
         VaadinSession.getCurrent().close();
         Page.getCurrent().reload();
     }
@@ -111,15 +88,13 @@ public final class DashboardUI extends UI {
             window.close();
         }
     }
-
-    /**
-     * @return An instance for accessing the (dummy) services layer.
-     */
+    
     public static DataProvider getDataProvider() {
         return ((DashboardUI) getCurrent()).dataProvider;
     }
-
+    
     public static DashboardEventBus getDashboardEventbus() {
-        return ((DashboardUI) getCurrent()).dashboardEventbus;
+        return ((DashboardUI) getCurrent()).eventBus;
     }
+
 }

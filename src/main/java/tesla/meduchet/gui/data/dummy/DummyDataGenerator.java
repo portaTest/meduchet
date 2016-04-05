@@ -5,8 +5,8 @@ import java.util.Collection;
 
 import com.vaadin.addon.charts.model.style.Color;
 import com.vaadin.addon.charts.model.style.SolidColor;
-
 import tesla.meduchet.gui.domain.DashboardNotification;
+
 
 public abstract class DummyDataGenerator {
 

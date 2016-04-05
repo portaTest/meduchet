@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.vaadin.spring.annotation.EnableVaadin;
+
 import tesla.meduchet.domain.Customer;
 import tesla.meduchet.repository.CustomerRepository;
 
@@ -20,7 +22,9 @@ import tesla.meduchet.repository.CustomerRepository;
 @EnableAutoConfiguration
 @EnableJpaRepositories("tesla.meduchet.repository")
 @EntityScan("tesla.meduchet.domain")
-@ComponentScan("tesla.meduchet.gui")
+@ComponentScan({"tesla.meduchet.gui","tesla.meduchet.gui.view","tesla.meduchet.gui.event","tesla.meduchet.gui.data","tesla.meduchet.gui.data.dummy",
+	"tesla.meduchet.gui.component"})
+@EnableVaadin
 public class Application {
 
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -65,5 +69,6 @@ public class Application {
 
 		};
 	}
+	
 
 }

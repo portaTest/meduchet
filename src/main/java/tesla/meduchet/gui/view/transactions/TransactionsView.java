@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.maddon.FilterableListContainer;
 
 import com.google.common.eventbus.Subscribe;
@@ -45,15 +46,14 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import tesla.meduchet.gui.DashboardUI;
-import tesla.meduchet.gui.component.MovieDetailsWindow;
 import tesla.meduchet.gui.domain.Transaction;
 import tesla.meduchet.gui.event.DashboardEvent.BrowserResizeEvent;
+import tesla.meduchet.gui.event.DashboardEvent.TransactionReportEvent;
 import tesla.meduchet.gui.event.DashboardEventBus;
 import tesla.meduchet.gui.view.DashboardViewType;
-import tesla.meduchet.gui.event.DashboardEvent.TransactionReportEvent;
 
 @SuppressWarnings({ "serial", "unchecked" })
-public final class TransactionsView extends VerticalLayout implements View {
+public class TransactionsView extends VerticalLayout implements View {
 
     private final Table table;
     private Button createReport;
@@ -63,10 +63,14 @@ public final class TransactionsView extends VerticalLayout implements View {
     private static final String[] DEFAULT_COLLAPSIBLE = { "country", "city",
             "theater", "room", "title", "seats" };
 
-    public TransactionsView() {
+    @Autowired
+    private DashboardEventBus eventBus;
+    @Autowired
+    public TransactionsView(DashboardEventBus eventBus) {
+    	this.eventBus=eventBus;
         setSizeFull();
         addStyleName("transactions");
-        DashboardEventBus.register(this);
+        eventBus.register(this);
 
         addComponent(buildToolbar());
 
@@ -78,9 +82,7 @@ public final class TransactionsView extends VerticalLayout implements View {
     @Override
     public void detach() {
         super.detach();
-        // A new instance of TransactionsView is created every time it's
-        // navigated to so we'll need to clean up references to it on detach.
-        DashboardEventBus.unregister(this);
+        eventBus.unregister(this);
     }
 
     private Component buildToolbar() {
@@ -285,7 +287,7 @@ public final class TransactionsView extends VerticalLayout implements View {
     void createNewReportFromSelection() {
         UI.getCurrent().getNavigator()
                 .navigateTo(DashboardViewType.REPORTS.getViewName());
-        DashboardEventBus.post(new TransactionReportEvent(
+        eventBus.post(new TransactionReportEvent(
                 (Collection<Transaction>) table.getValue()));
     }
 
@@ -312,8 +314,6 @@ public final class TransactionsView extends VerticalLayout implements View {
                 if (item != null) {
                     Long movieId = (Long) item.getItemProperty("movieId")
                             .getValue();
-                    MovieDetailsWindow.open(DashboardUI.getDataProvider()
-                            .getMovie(movieId), null, null);
                 }
             }
         }

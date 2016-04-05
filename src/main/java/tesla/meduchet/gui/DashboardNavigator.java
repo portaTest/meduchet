@@ -1,11 +1,12 @@
 package tesla.meduchet.gui;
 
-import org.vaadin.googleanalytics.tracking.GoogleAnalyticsTracker;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.navigator.ViewProvider;
+import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.UI;
 
@@ -15,59 +16,38 @@ import tesla.meduchet.gui.event.DashboardEvent.PostViewChangeEvent;
 import tesla.meduchet.gui.event.DashboardEventBus;
 import tesla.meduchet.gui.view.DashboardViewType;
 
+
 @SuppressWarnings("serial")
 public class DashboardNavigator extends Navigator {
 
-    // Provide a Google Analytics tracker id here
-    private static final String TRACKER_ID = null;// "UA-658457-6";
-    private GoogleAnalyticsTracker tracker;
-
     private static final DashboardViewType ERROR_VIEW = DashboardViewType.DASHBOARD;
-    private ViewProvider errorViewProvider;
+    private SpringViewProvider errorViewProvider;
 
-    public DashboardNavigator(final ComponentContainer container) {
+    @Autowired
+    private DashboardEventBus eventBus;
+    
+    public DashboardNavigator(ComponentContainer container) {
         super(UI.getCurrent(), container);
-
-        String host = getUI().getPage().getLocation().getHost();
-        if (TRACKER_ID != null && host.endsWith("demo.vaadin.com")) {
-            initGATracker(TRACKER_ID);
-        }
         initViewChangeListener();
         initViewProviders();
 
     }
 
-    private void initGATracker(final String trackerId) {
-        tracker = new GoogleAnalyticsTracker(trackerId, "demo.vaadin.com");
-
-        // GoogleAnalyticsTracker is an extension add-on for UI so it is
-        // initialized by calling .extend(UI)
-        tracker.extend(UI.getCurrent());
-    }
 
     private void initViewChangeListener() {
         addViewChangeListener(new ViewChangeListener() {
 
             @Override
             public boolean beforeViewChange(final ViewChangeEvent event) {
-                // Since there's no conditions in switching between the views
-                // we can always return true.
                 return true;
             }
 
             @Override
             public void afterViewChange(final ViewChangeEvent event) {
-                DashboardViewType view = DashboardViewType.getByViewName(event
-                        .getViewName());
-                // Appropriate events get fired after the view is changed.
-                DashboardEventBus.post(new PostViewChangeEvent(view));
-                DashboardEventBus.post(new BrowserResizeEvent());
-                DashboardEventBus.post(new CloseOpenWindowsEvent());
-
-                if (tracker != null) {
-                    // The view change is submitted as a pageview for GA tracker
-                    tracker.trackPageview("/dashboard/" + event.getViewName());
-                }
+                DashboardViewType view = DashboardViewType.getByViewName(event.getViewName());
+                eventBus.post(new PostViewChangeEvent(view));
+                eventBus.post(new BrowserResizeEvent());
+                eventBus.post(new CloseOpenWindowsEvent());
             }
         });
     }
@@ -104,7 +84,7 @@ public class DashboardNavigator extends Navigator {
             };
 
             if (viewType == ERROR_VIEW) {
-                errorViewProvider = viewProvider;
+                //errorViewProvider = viewProvider;
             }
 
             addProvider(viewProvider);

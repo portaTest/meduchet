@@ -1,5 +1,7 @@
 package tesla.meduchet.gui.component;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.data.fieldgroup.PropertyId;
@@ -11,6 +13,8 @@ import com.vaadin.server.ThemeResource;
 import com.vaadin.server.UserError;
 import com.vaadin.shared.Position;
 import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -37,19 +41,14 @@ import tesla.meduchet.gui.event.DashboardEvent.CloseOpenWindowsEvent;
 import tesla.meduchet.gui.event.DashboardEvent.ProfileUpdatedEvent;
 import tesla.meduchet.gui.event.DashboardEventBus;
 
+@SpringComponent
+@UIScope
 @SuppressWarnings("serial")
 public class ProfilePreferencesWindow extends Window {
 
     public static final String ID = "profilepreferenceswindow";
 
     private final BeanFieldGroup<User> fieldGroup;
-    /*
-     * Fields for editing the User object are defined here as class members.
-     * They are later bound to a FieldGroup by calling
-     * fieldGroup.bindMemberFields(this). The Fields' values don't need to be
-     * explicitly set, calling fieldGroup.setItemDataSource(user) synchronizes
-     * the fields with the user object.
-     */
     @PropertyId("firstName")
     private TextField firstNameField;
     @PropertyId("lastName")
@@ -70,7 +69,9 @@ public class ProfilePreferencesWindow extends Window {
     private TextField websiteField;
     @PropertyId("bio")
     private TextArea bioField;
-
+    @Autowired
+    private static DashboardEventBus eventBus;
+    
     private ProfilePreferencesWindow(final User user,
             final boolean preferencesTabOpen) {
         addStyleName("profile-window");
@@ -252,7 +253,7 @@ public class ProfilePreferencesWindow extends Window {
                     success.setPosition(Position.BOTTOM_CENTER);
                     success.show(Page.getCurrent());
 
-                    DashboardEventBus.post(new ProfileUpdatedEvent());
+                    eventBus.post(new ProfileUpdatedEvent());
                     close();
                 } catch (CommitException e) {
                     Notification.show("Error while updating profile",
@@ -268,7 +269,7 @@ public class ProfilePreferencesWindow extends Window {
     }
 
     public static void open(final User user, final boolean preferencesTabActive) {
-        DashboardEventBus.post(new CloseOpenWindowsEvent());
+        eventBus.post(new CloseOpenWindowsEvent());
         Window w = new ProfilePreferencesWindow(user, preferencesTabActive);
         UI.getCurrent().addWindow(w);
         w.focus();

@@ -1,19 +1,24 @@
 package tesla.meduchet.gui.view;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 
-import tesla.meduchet.gui.DashboardNavigator;
-
+@SpringComponent
+@UIScope
 @SuppressWarnings("serial")
 public class MainView extends HorizontalLayout {
-
-    public MainView() {
+	
+    @Autowired
+	public MainView(DashboardMenu dashboardMenu) {
         setSizeFull();
         addStyleName("mainview");
 
-        addComponent(new DashboardMenu());
+        addComponent(dashboardMenu);
 
         ComponentContainer content = new CssLayout();
         content.addStyleName("view-content");
@@ -21,6 +26,6 @@ public class MainView extends HorizontalLayout {
         addComponent(content);
         setExpandRatio(content, 1.0f);
 
-        new DashboardNavigator(content);
+        //new DashboardNavigator(content);
     }
 }

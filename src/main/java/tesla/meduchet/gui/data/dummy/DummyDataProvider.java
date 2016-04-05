@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
@@ -34,7 +38,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.util.CurrentInstance;
 
@@ -46,6 +49,8 @@ import tesla.meduchet.gui.domain.Transaction;
 import tesla.meduchet.gui.domain.User;
 
 
+@Component
+@Scope(scopeName="singleton",proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class DummyDataProvider implements DataProvider {
 
     // TODO: Get API key from http://developer.rottentomatoes.com
@@ -76,10 +81,10 @@ public class DummyDataProvider implements DataProvider {
     }
 
     private void refreshStaticData() {
-        countryToCities = loadTheaterData();
-        movies = loadMoviesData();
-        transactions = generateTransactionsData();
-        revenue = countRevenues();
+     //   countryToCities = loadTheaterData();
+    //    movies = loadMoviesData();
+     //   transactions = generateTransactionsData();
+      //  revenue = countRevenues();
     }
 
     /**
@@ -385,6 +390,7 @@ public class DummyDataProvider implements DataProvider {
 
     @Override
     public User authenticate(String userName, String password) {
+    	System.err.println("login req");
         User user = new User();
         user.setFirstName(DummyDataGenerator.randomFirstName());
         user.setLastName(DummyDataGenerator.randomLastName());
@@ -396,6 +402,7 @@ public class DummyDataProvider implements DataProvider {
         user.setLocation(DummyDataGenerator.randomWord(5, true));
         user.setBio("Quis aute iure reprehenderit in voluptate velit esse."
                 + "Cras mattis iudicium purus sit amet fermentum.");
+        System.err.println(user.getFirstName()+user.getLastName());
         return user;
     }
 

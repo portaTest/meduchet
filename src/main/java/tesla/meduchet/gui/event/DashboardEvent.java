@@ -2,11 +2,16 @@ package tesla.meduchet.gui.event;
 
 import java.util.Collection;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import tesla.meduchet.gui.domain.Transaction;
 import tesla.meduchet.gui.view.DashboardViewType;
 
 
-
+@Component
+@Scope(scopeName="singleton",proxyMode=ScopedProxyMode.TARGET_CLASS)
 public abstract class DashboardEvent {
 
     public static final class UserLoginRequestedEvent {
