@@ -23,7 +23,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<main.basedir>${basedir}/../..</main.basedir>
+		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
 	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -87,9 +90,21 @@
 			<artifactId>guava</artifactId>
 			<version>18.0</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/webapp</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -99,6 +114,16 @@
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>7.5.6</version>
+				<goals>
+                    <goal>update-theme</goal>
+                    <goal>compile-theme</goal>
+                    <!--
+                    <goal>clean</goal>
+                    <goal>resources</goal>
+                    <goal>update-widgetset</goal>
+                    <goal>compile</goal>
+                    -->
+                </goals>
 			</plugin>
 		</plugins>
 	</build>

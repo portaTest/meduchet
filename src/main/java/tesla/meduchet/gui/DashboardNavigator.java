@@ -26,6 +26,7 @@ public class DashboardNavigator extends Navigator {
     @Autowired
     private DashboardEventBus eventBus;
     
+    
     public DashboardNavigator(ComponentContainer container) {
         super(UI.getCurrent(), container);
         initViewChangeListener();

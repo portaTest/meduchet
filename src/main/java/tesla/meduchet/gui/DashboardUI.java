@@ -1,6 +1,7 @@
 package tesla.meduchet.gui;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -15,7 +16,6 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 
 import tesla.meduchet.gui.data.DataProvider;
-import tesla.meduchet.gui.data.dummy.DummyDataProvider;
 import tesla.meduchet.gui.domain.User;
 import tesla.meduchet.gui.event.DashboardEvent.CloseOpenWindowsEvent;
 import tesla.meduchet.gui.event.DashboardEvent.UserLoggedOutEvent;
@@ -28,7 +28,7 @@ import tesla.meduchet.gui.view.MainView;
 @SpringUI
 @UIScope
 @Title("Meduchet")
-@Theme("valo")
+@Theme("dashboard")
 @SuppressWarnings("serial")
 public class DashboardUI extends UI {
 
@@ -71,8 +71,7 @@ public class DashboardUI extends UI {
     @Subscribe
     public void userLoginRequested(final UserLoginRequestedEvent event) {
     	User user = dataProvider.authenticate(event.getUserName(),event.getPassword());
-    	System.err.println(user.getFirstName());
-    	VaadinSession.getCurrent().setAttribute(User.class.getName(), user);
+    	VaadinSession.getCurrent().setAttribute(User.class, user);
         updateContent();
     }
 

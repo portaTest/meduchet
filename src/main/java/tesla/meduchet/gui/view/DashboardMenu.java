@@ -1,5 +1,7 @@
 package tesla.meduchet.gui.view;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.server.VaadinSession;
@@ -64,8 +66,11 @@ public class DashboardMenu extends CustomComponent {
     }
 
     private Component buildTitle() {
-    	 User user = (User) VaadinSession.getCurrent().getAttribute(
-                 User.class.getName());
+    	 User user = (User) VaadinSession.getCurrent().getAttribute(User.class);
+    	 if (user==null){
+    		 //TODO Find user!
+    		 System.err.println("where is my user?");
+    	 }
         Label logo = new Label("<strong>Dashboard</strong>",
                 ContentMode.HTML);
         logo.setSizeUndefined();

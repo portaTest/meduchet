@@ -390,7 +390,6 @@ public class DummyDataProvider implements DataProvider {
 
     @Override
     public User authenticate(String userName, String password) {
-    	System.err.println("login req");
         User user = new User();
         user.setFirstName(DummyDataGenerator.randomFirstName());
         user.setLastName(DummyDataGenerator.randomLastName());
@@ -402,7 +401,6 @@ public class DummyDataProvider implements DataProvider {
         user.setLocation(DummyDataGenerator.randomWord(5, true));
         user.setBio("Quis aute iure reprehenderit in voluptate velit esse."
                 + "Cras mattis iudicium purus sit amet fermentum.");
-        System.err.println(user.getFirstName()+user.getLastName());
         return user;
     }
 
