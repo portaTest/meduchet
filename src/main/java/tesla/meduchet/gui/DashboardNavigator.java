@@ -1,68 +1,62 @@
 package tesla.meduchet.gui;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.navigator.ViewProvider;
-import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.UI;
 
 import tesla.meduchet.gui.event.DashboardEvent.BrowserResizeEvent;
 import tesla.meduchet.gui.event.DashboardEvent.CloseOpenWindowsEvent;
 import tesla.meduchet.gui.event.DashboardEvent.PostViewChangeEvent;
-import tesla.meduchet.gui.event.DashboardEventBus;
 import tesla.meduchet.gui.view.DashboardViewType;
-
 
 @SuppressWarnings("serial")
 public class DashboardNavigator extends Navigator {
 
+    
     private static final DashboardViewType ERROR_VIEW = DashboardViewType.DASHBOARD;
-    private SpringViewProvider errorViewProvider;
+    private ViewProvider errorViewProvider;
 
-    @Autowired
-    private DashboardEventBus eventBus;
-    
-    @Autowired
-    private SpringViewProvider viewProvider;
-    
-    public DashboardNavigator(ComponentContainer container) {
+    public DashboardNavigator(final ComponentContainer container) {
         super(UI.getCurrent(), container);
-        this.addProvider(viewProvider);
+       
         initViewChangeListener();
-        //initViewProviders();
+        initViewProviders();
 
     }
 
-
+ 
     private void initViewChangeListener() {
         addViewChangeListener(new ViewChangeListener() {
 
             @Override
             public boolean beforeViewChange(final ViewChangeEvent event) {
+                // Since there's no conditions in switching between the views
+                // we can always return true.
                 return true;
             }
 
             @Override
             public void afterViewChange(final ViewChangeEvent event) {
-                DashboardViewType view = DashboardViewType.getByViewName(event.getViewName());
-                eventBus.post(new PostViewChangeEvent(view));
-                eventBus.post(new BrowserResizeEvent());
-                eventBus.post(new CloseOpenWindowsEvent());
+                DashboardViewType view = DashboardViewType.getByViewName(event
+                        .getViewName());
+                // Appropriate events get fired after the view is changed.
+                DashboardUI.getDashboardEventbus().post(new PostViewChangeEvent(view));
+                DashboardUI.getDashboardEventbus().post(new BrowserResizeEvent());
+                DashboardUI.getDashboardEventbus().post(new CloseOpenWindowsEvent());
+
             }
         });
     }
 
     private void initViewProviders() {
+        // A dedicated view provider is added for each separate view type
         for (final DashboardViewType viewType : DashboardViewType.values()) {
             ViewProvider viewProvider = new ClassBasedViewProvider(
                     viewType.getViewName(), viewType.getViewClass()) {
 
-                // This field caches an already initialized view instance if the
-                // view should be cached (stateful views).
                 private View cachedInstance;
 
                 @Override
@@ -87,7 +81,7 @@ public class DashboardNavigator extends Navigator {
             };
 
             if (viewType == ERROR_VIEW) {
-                //errorViewProvider = viewProvider;
+                errorViewProvider = viewProvider;
             }
 
             addProvider(viewProvider);

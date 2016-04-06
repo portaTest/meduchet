@@ -115,15 +115,11 @@
 				<artifactId>vaadin-maven-plugin</artifactId>
 				<version>7.5.6</version>
 				<goals>
-                    <goal>update-theme</goal>
-                    <goal>compile-theme</goal>
-                    <!--
-                    <goal>clean</goal>
-                    <goal>resources</goal>
-                    <goal>update-widgetset</goal>
-                    <goal>compile</goal>
-                    -->
-                </goals>
+					<goal>update-theme</goal>
+					<goal>compile-theme</goal>
+					<!-- <goal>clean</goal> <goal>resources</goal> <goal>update-widgetset</goal> 
+						<goal>compile</goal> -->
+				</goals>
 			</plugin>
 		</plugins>
 	</build>

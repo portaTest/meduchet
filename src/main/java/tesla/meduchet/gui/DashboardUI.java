@@ -36,9 +36,9 @@ public class DashboardUI extends UI {
 	@Autowired
     private DashboardEventBus eventBus;
 	
-	private DataProvider dataProvider;
 	
-	//private MainView mainView=new MainView();
+	@Autowired
+	private DataProvider dataProvider;
 	
 
 	@Override
@@ -48,15 +48,14 @@ public class DashboardUI extends UI {
         addStyleName(ValoTheme.UI_WITH_MENU);
         updateContent();
     }
-
- 
+	
     private void updateContent() {
         User user = (User) VaadinSession.getCurrent().getAttribute(
                 User.class.getName());
         if (user != null && "admin".equals(user.getRole())) {
-		//	setContent(mainView);
+			setContent(new MainView());
 			removeStyleName("loginview");
-			//getNavigator().navigateTo(getNavigator().getState());
+			getNavigator().navigateTo(getNavigator().getState());
         } else {
             setContent(new LoginView());
             addStyleName("loginview");
