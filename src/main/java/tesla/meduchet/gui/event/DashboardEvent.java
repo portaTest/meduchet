@@ -11,7 +11,7 @@ import tesla.meduchet.gui.view.DashboardViewType;
 
 
 @Component
-@Scope(scopeName="singleton",proxyMode=ScopedProxyMode.TARGET_CLASS)
+@Scope(scopeName="session",proxyMode=ScopedProxyMode.TARGET_CLASS)
 public abstract class DashboardEvent {
 
     public static final class UserLoginRequestedEvent {

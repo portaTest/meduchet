@@ -1,7 +1,5 @@
 package tesla.meduchet.gui.view;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.server.VaadinSession;
@@ -14,10 +12,8 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
-import tesla.meduchet.gui.component.ProfilePreferencesWindow;
 import tesla.meduchet.gui.domain.User;
 import tesla.meduchet.gui.event.DashboardEventBus;
 

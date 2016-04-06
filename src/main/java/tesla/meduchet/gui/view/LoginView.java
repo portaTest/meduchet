@@ -1,11 +1,10 @@
 package tesla.meduchet.gui.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Responsive;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -17,14 +16,13 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import tesla.meduchet.gui.event.DashboardEvent.UserLoginRequestedEvent;
 import tesla.meduchet.gui.event.DashboardEventBus;
 
-@SpringComponent
-@UIScope
 @SuppressWarnings("serial")
 public class LoginView extends VerticalLayout {
 
@@ -33,6 +31,11 @@ public class LoginView extends VerticalLayout {
 	
     public LoginView() {
         setSizeFull();
+        if (UI.getCurrent()==null){
+          	System.err.println("UI is null from login form");
+          }else{
+        	  System.err.println("UI is from login form "+UI.getCurrent().toString());
+          }
         Component loginForm = buildLoginForm();
         addComponent(loginForm);
         setComponentAlignment(loginForm, Alignment.MIDDLE_CENTER);

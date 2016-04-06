@@ -26,11 +26,14 @@ public class DashboardNavigator extends Navigator {
     @Autowired
     private DashboardEventBus eventBus;
     
+    @Autowired
+    private SpringViewProvider viewProvider;
     
     public DashboardNavigator(ComponentContainer container) {
         super(UI.getCurrent(), container);
+        this.addProvider(viewProvider);
         initViewChangeListener();
-        initViewProviders();
+        //initViewProviders();
 
     }
 
@@ -54,7 +57,6 @@ public class DashboardNavigator extends Navigator {
     }
 
     private void initViewProviders() {
-        // A dedicated view provider is added for each separate view type
         for (final DashboardViewType viewType : DashboardViewType.values()) {
             ViewProvider viewProvider = new ClassBasedViewProvider(
                     viewType.getViewName(), viewType.getViewClass()) {

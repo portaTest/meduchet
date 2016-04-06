@@ -36,14 +36,9 @@ public class DashboardUI extends UI {
 	@Autowired
     private DashboardEventBus eventBus;
 	
-	@Autowired
-	private LoginView loginView;
-	
-	@Autowired
 	private DataProvider dataProvider;
 	
-	@Autowired
-	private MainView mainView;
+	//private MainView mainView=new MainView();
 	
 
 	@Override
@@ -59,11 +54,11 @@ public class DashboardUI extends UI {
         User user = (User) VaadinSession.getCurrent().getAttribute(
                 User.class.getName());
         if (user != null && "admin".equals(user.getRole())) {
-			setContent(mainView);
+		//	setContent(mainView);
 			removeStyleName("loginview");
 			//getNavigator().navigateTo(getNavigator().getState());
         } else {
-            setContent(loginView);
+            setContent(new LoginView());
             addStyleName("loginview");
         }
     }

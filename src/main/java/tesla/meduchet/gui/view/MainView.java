@@ -7,10 +7,11 @@ import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.UI;
 
-@SpringComponent
-@UIScope
-@SuppressWarnings("serial")
+import tesla.meduchet.gui.DashboardNavigator;
+
+
 public class MainView extends HorizontalLayout {
 	
     @Autowired
@@ -26,6 +27,11 @@ public class MainView extends HorizontalLayout {
         addComponent(content);
         setExpandRatio(content, 1.0f);
 
-        //new DashboardNavigator(content);
+        if (UI.getCurrent()==null){
+        	System.err.println("UI is null");
+        }else{
+        	System.err.println("navigator created");
+        	new DashboardNavigator(content);
+        }
     }
 }
