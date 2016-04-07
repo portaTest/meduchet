@@ -15,12 +15,10 @@ public class DashboardEventBus implements SubscriberExceptionHandler {
 	private final EventBus eventBus = new EventBus(this);
 
 	public void post(final Object event) {
-		System.err.println(this.toString());
 		eventBus.post(event);
 	}
 
 	public void register(final Object object) {
-		System.err.println(this.toString());
 		eventBus.register(object);
 	}
 
